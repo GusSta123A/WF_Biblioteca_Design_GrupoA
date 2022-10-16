@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_CustomerTestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ctr_Customer">
+          <Key>
+            <PropertyRef Name="ctr_id" />
+          </Key>
+          <Property Name="ctr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ctr_name" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ctr_Persona">
+          <Key>
+            <PropertyRef Name="per_id" />
+          </Key>
+          <Property Name="per_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="per_nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="per_apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="per_fecha_nacimiento" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="per_peso" Type="int" Nullable="false" />
+          <Property Name="per_altura" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ctr_Rol">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ctr_User">
+          <Key>
+            <PropertyRef Name="usr_id" />
+          </Key>
+          <Property Name="usr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usr_username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usr_password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usr_state" Type="int" Nullable="false" />
+          <Property Name="rol_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Ctr_User__rol_id__0C85DE4D">
+          <End Role="Ctr_Rol" Type="Self.Ctr_Rol" Multiplicity="1" />
+          <End Role="Ctr_User" Type="Self.Ctr_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ctr_Rol">
+              <PropertyRef Name="rol_id" />
+            </Principal>
+            <Dependent Role="Ctr_User">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_CustomerTestDBModelStoreContainer">
+          <EntitySet Name="Ctr_Customer" EntityType="Self.Ctr_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ctr_Persona" EntityType="Self.Ctr_Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ctr_Rol" EntityType="Self.Ctr_Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ctr_User" EntityType="Self.Ctr_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Ctr_User__rol_id__0C85DE4D" Association="Self.FK__Ctr_User__rol_id__0C85DE4D">
+            <End Role="Ctr_Rol" EntitySet="Ctr_Rol" />
+            <End Role="Ctr_User" EntitySet="Ctr_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_CustomerTestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ctr_Customer">
+          <Key>
+            <PropertyRef Name="ctr_id" />
+          </Key>
+          <Property Name="ctr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ctr_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ctr_Persona">
+          <Key>
+            <PropertyRef Name="per_id" />
+          </Key>
+          <Property Name="per_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="per_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="per_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="per_fecha_nacimiento" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="per_peso" Type="Int32" Nullable="false" />
+          <Property Name="per_altura" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ctr_Rol">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ctr_User" Relationship="Self.FK__Ctr_User__rol_id__0C85DE4D" FromRole="Ctr_Rol" ToRole="Ctr_User" />
+        </EntityType>
+        <EntityType Name="Ctr_User">
+          <Key>
+            <PropertyRef Name="usr_id" />
+          </Key>
+          <Property Name="usr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usr_username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_state" Type="Int32" Nullable="false" />
+          <Property Name="rol_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ctr_Rol" Relationship="Self.FK__Ctr_User__rol_id__0C85DE4D" FromRole="Ctr_User" ToRole="Ctr_Rol" />
+        </EntityType>
+        <Association Name="FK__Ctr_User__rol_id__0C85DE4D">
+          <End Role="Ctr_Rol" Type="Self.Ctr_Rol" Multiplicity="1" />
+          <End Role="Ctr_User" Type="Self.Ctr_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ctr_Rol">
+              <PropertyRef Name="rol_id" />
+            </Principal>
+            <Dependent Role="Ctr_User">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_CustomerTestDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ctr_Customer" EntityType="Self.Ctr_Customer" />
+          <EntitySet Name="Ctr_Persona" EntityType="Self.Ctr_Persona" />
+          <EntitySet Name="Ctr_Rol" EntityType="Self.Ctr_Rol" />
+          <EntitySet Name="Ctr_User" EntityType="Self.Ctr_User" />
+          <AssociationSet Name="FK__Ctr_User__rol_id__0C85DE4D" Association="Self.FK__Ctr_User__rol_id__0C85DE4D">
+            <End Role="Ctr_Rol" EntitySet="Ctr_Rol" />
+            <End Role="Ctr_User" EntitySet="Ctr_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_CustomerTestDBModelStoreContainer" CdmEntityContainer="DB_CustomerTestDBEntities">
+          <EntitySetMapping Name="Ctr_Customer">
+            <EntityTypeMapping TypeName="DB_CustomerTestDBModel.Ctr_Customer">
+              <MappingFragment StoreEntitySet="Ctr_Customer">
+                <ScalarProperty Name="ctr_id" ColumnName="ctr_id" />
+                <ScalarProperty Name="ctr_name" ColumnName="ctr_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ctr_Persona">
+            <EntityTypeMapping TypeName="DB_CustomerTestDBModel.Ctr_Persona">
+              <MappingFragment StoreEntitySet="Ctr_Persona">
+                <ScalarProperty Name="per_id" ColumnName="per_id" />
+                <ScalarProperty Name="per_nombre" ColumnName="per_nombre" />
+                <ScalarProperty Name="per_apellido" ColumnName="per_apellido" />
+                <ScalarProperty Name="per_fecha_nacimiento" ColumnName="per_fecha_nacimiento" />
+                <ScalarProperty Name="per_peso" ColumnName="per_peso" />
+                <ScalarProperty Name="per_altura" ColumnName="per_altura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ctr_Rol">
+            <EntityTypeMapping TypeName="DB_CustomerTestDBModel.Ctr_Rol">
+              <MappingFragment StoreEntitySet="Ctr_Rol">
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+                <ScalarProperty Name="rol_name" ColumnName="rol_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ctr_User">
+            <EntityTypeMapping TypeName="DB_CustomerTestDBModel.Ctr_User">
+              <MappingFragment StoreEntitySet="Ctr_User">
+                <ScalarProperty Name="usr_id" ColumnName="usr_id" />
+                <ScalarProperty Name="usr_username" ColumnName="usr_username" />
+                <ScalarProperty Name="usr_password" ColumnName="usr_password" />
+                <ScalarProperty Name="usr_state" ColumnName="usr_state" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
